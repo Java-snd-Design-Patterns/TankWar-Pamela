@@ -14,7 +14,6 @@ public class TankClient extends Frame {
 	}
 
 	public void update(Graphics g) {
-
 		if (offScreenImage == null) {
 			offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
 		}
@@ -56,11 +55,11 @@ public class TankClient extends Frame {
 		public void run() {
 			while (true) {
 				repaint();
-
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
+
 				}
 			}
 		}
@@ -73,4 +72,5 @@ public class TankClient extends Frame {
 		}
 
 	}
+
 }
