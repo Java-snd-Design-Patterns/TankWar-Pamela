@@ -2,6 +2,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class TankClient extends Frame {
+	public static final int GAME_WIDTH = 800;
+	public static final int GAME_HEIGHT = 600;
 
 	int x = 50, y = 50;
 
@@ -20,14 +22,14 @@ public class TankClient extends Frame {
 
 	public void update(Graphics g) {
 		if (offScreenImage == null) {
-			offScreenImage = this.createImage(800, 600);
+			offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
 		}
 //拿到这个图片的画笔
 		Graphics gOffScreen = offScreenImage.getGraphics();
 
 		Color c = gOffScreen.getColor();
 		gOffScreen.setColor(Color.GREEN);
-		gOffScreen.fillRect(0, 0, 800, 600);
+		gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		gOffScreen.setColor(c);
 		print(gOffScreen);
 		g.drawImage(offScreenImage, 0, 0, null);
@@ -35,7 +37,7 @@ public class TankClient extends Frame {
 
 	public void launchFrame() {
 		this.setLocation(300, 50);
-		this.setSize(800, 600);
+		this.setSize(GAME_WIDTH, GAME_HEIGHT);
 		this.setTitle("TankWar");
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -66,5 +68,6 @@ public class TankClient extends Frame {
 				}
 			}
 		}
+
 	}
 }
