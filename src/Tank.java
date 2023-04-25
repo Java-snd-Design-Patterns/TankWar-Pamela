@@ -8,10 +8,8 @@ public class Tank {
 
 	private int x, y;
 
-//是否按下了4个方向键
 	private boolean bL = false, bU = false, bR = false, bD = false;
 
-//成员变量：方向
 	enum Direction {
 		L, LU, U, RU, R, RD, D, LD, STOP
 	};

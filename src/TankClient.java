@@ -7,10 +7,8 @@ public class TankClient extends Frame {
 
 	Tank myTank = new Tank(50, 50);
 
-//这是一张虚拟图片
 	Image offScreenImage = null;
 
-//The paint method does not need to be called and will be automatically called once it is to be redrawn
 	public void paint(Graphics g) {
 		myTank.draw(g);
 	}
@@ -20,7 +18,6 @@ public class TankClient extends Frame {
 			offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
 		}
 
-//拿到这个图片的画笔
 		Graphics gOffScreen = offScreenImage.getGraphics();
 
 		Color c = gOffScreen.getColor();
