@@ -11,19 +11,23 @@ public class TankClient extends Frame {
 
 	public void paint(Graphics g) {
 		myTank.draw(g);
-		m. draw (g);
+		m.draw(g);
 	}
 
-public void update(Graphics g) {
-if(offScreenImage == null) {
-offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
-} 
+	public void update(Graphics g) {
+		if (offScreenImage == null) {
+			offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
+		}
 
-Graphics gOffScreen = offScreenImage.getGraphics();
+		Graphics gOffScreen = offScreenImage.getGraphics();
 
-Color c = gOffScreen.getColor(); gOffScreen.setColor(Color.GREEN); gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT); gOffScreen.setColor(c);
-print(gOffScreen); g.drawImage(offScreenImage, 0, 0, null);
-}
+		Color c = gOffScreen.getColor();
+		gOffScreen.setColor(Color.GREEN);
+		gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+		gOffScreen.setColor(c);
+		print(gOffScreen);
+		g.drawImage(offScreenImage, 0, 0, null);
+	}
 
 	public void launchFrame() {
 		this.setLocation(300, 50);
@@ -61,6 +65,7 @@ print(gOffScreen); g.drawImage(offScreenImage, 0, 0, null);
 			}
 		}
 	}
+
 	private class KeyMonitor extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
 			myTank.KeyPressed(e);
