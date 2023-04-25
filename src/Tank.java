@@ -5,11 +5,8 @@ public class Tank {
 
 	public static final int XSPEED = 5;
 	public static final int YSPEED = 5;
-	public static final int WIDTH = 30; 
-	public static final int HEIGHT = 30;
 
-	TankClient tc = null;
-	int x, y;
+	private int x, y;
 
 	private boolean bL = false, bU = false, bR = false, bD = false;
 
@@ -23,17 +20,14 @@ public class Tank {
 		this.x = x;
 		this.y = y;
 	}
-	public Tank(int x, int y, TankClient tc) {
-		this(x, y);
-		this.tc = tc;
-		}
-
 
 	public void draw(Graphics g) {
 		Color c = g.getColor();
 		g.setColor(Color.RED);
-		g.fillOval(x, y, WIDTH, HEIGHT);
+		g.fillOval(x, y, 30, 30);
+
 		g.setColor(c);
+
 		move();
 	}
 
@@ -75,40 +69,18 @@ public class Tank {
 	public void KeyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		switch (key) {
-		case KeyEvent.VK_A:
-			x -= 5;
-			break;
-		case KeyEvent.VK_W:
-			y -= 5;
-			break;
-		case KeyEvent.VK_D:
-			x += 5;
-			break;
-		case KeyEvent.VK_S:
-			y += 5;
-			break;
-		case KeyEvent.VK_J:
-			tc.m = fire(); 
-			break;
-
-		}
-		locateDirection();
-	}
-
-	public void keyReleased(KeyEvent e) {
-		int key = e.getKeyCode();
-		switch (key) {
 		case KeyEvent.VK_LEFT:
-			bL = false;
+
+			bL = true;
 			break;
 		case KeyEvent.VK_UP:
-			bU = false;
+			bU = true;
 			break;
 		case KeyEvent.VK_RIGHT:
-			bR = false;
+			bR = true;
 			break;
 		case KeyEvent.VK_DOWN:
-			bD = false;
+			bD = true;
 			break;
 		}
 		locateDirection();
@@ -135,14 +107,5 @@ public class Tank {
 			dir = Direction.STOP;
 
 	}
-	
-	public Missile fire() {
-
-		int x = this.x + Tank.WIDTH / 2 - Missile.WIDTH / 2;
-		int y = this.y + Tank.HEIGHT /2 - Missile.WIDTH / 2;
-		Missile m = new Missile(x, y, dir); 
-		return m;
-		}
-
 
 }
