@@ -2,21 +2,23 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Tank {
+
 	public static final int XSPEED = 5;
 	public static final int YSPEED = 5;
-
-	public static final int WIDTH = 30;
+	public static final int WIDTH = 30; 
 	public static final int HEIGHT = 30;
 
 	TankClient tc = null;
+	int x, y;
 
-	private int x, y;
 	private boolean bL = false, bU = false, bR = false, bD = false;
 
 	enum Direction {
-		L, LU, U, RU, R, RD, D, LD, STOP };
-		
+		L, LU, U, RU, R, RD, D, LD, STOP
+	};
+
 	private Direction dir = Direction.STOP;
+
 	public Tank(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -24,7 +26,8 @@ public class Tank {
 	public Tank(int x, int y, TankClient tc) {
 		this(x, y);
 		this.tc = tc;
-	}
+		}
+
 
 	public void draw(Graphics g) {
 		Color c = g.getColor();
@@ -72,21 +75,22 @@ public class Tank {
 	public void KeyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		switch (key) {
-		case KeyEvent.VK_CONTROL:
-			tc.m = fire();
+		case KeyEvent.VK_A:
+			x -= 5;
 			break;
-		case KeyEvent.VK_LEFT:
-			bL = true;
+		case KeyEvent.VK_W:
+			y -= 5;
 			break;
-		case KeyEvent.VK_UP:
-			bU = true;
+		case KeyEvent.VK_D:
+			x += 5;
 			break;
-		case KeyEvent.VK_RIGHT:
-			bR = true;
+		case KeyEvent.VK_S:
+			y += 5;
 			break;
-		case KeyEvent.VK_DOWN:
-			bD = true;
+		case KeyEvent.VK_J:
+			tc.m = fire(); 
 			break;
+
 		}
 		locateDirection();
 	}
@@ -129,12 +133,16 @@ public class Tank {
 			dir = Direction.LD;
 		else if (!bL && !bU && !bR && !bD)
 			dir = Direction.STOP;
-	}
 
+	}
+	
 	public Missile fire() {
+
 		int x = this.x + Tank.WIDTH / 2 - Missile.WIDTH / 2;
-		int y = this.y + Tank.HEIGHT / 2 - Missile.WIDTH / 2;
+		int y = this.y + Tank.HEIGHT /2 - Missile.WIDTH / 2;
 		Missile m = new Missile(x, y, dir); 
 		return m;
-	}
+		}
+
+
 }
