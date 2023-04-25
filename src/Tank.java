@@ -8,8 +8,10 @@ public class Tank {
 
 	private int x, y;
 
+//是否按下了4个方向键
 	private boolean bL = false, bU = false, bR = false, bD = false;
 
+//成员变量：方向
 	enum Direction {
 		L, LU, U, RU, R, RD, D, LD, STOP
 	};
@@ -66,7 +68,7 @@ public class Tank {
 		}
 	}
 
-	public void KyePressed(KeyEvent e) {
+	public void KeyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		switch (key) {
 		case KeyEvent.VK_LEFT:
@@ -103,7 +105,6 @@ public class Tank {
 		}
 		locateDirection();
 	}
-
 	void locateDirection() {
 		if (bL && !bU && !bR && !bD)
 			dir = Direction.L;
@@ -123,5 +124,7 @@ public class Tank {
 			dir = Direction.LD;
 		else if (!bL && !bU && !bR && !bD)
 			dir = Direction.STOP;
+
 	}
+
 }
