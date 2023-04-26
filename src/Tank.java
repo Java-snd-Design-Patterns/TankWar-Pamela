@@ -105,9 +105,6 @@ public class Tank {
 		case STOP:
 			break;
 		}
-		if (this.dir != Direction.STOP) {
-			this.ptDir = this.dir;
-		}
 	}
 
 	public void KeyPressed(KeyEvent e) {
@@ -132,6 +129,7 @@ public class Tank {
 		locateDirection();
 	}
 
+	
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		switch (key) {
@@ -148,6 +146,10 @@ public class Tank {
 			bD = false;
 			break;
 		}
+		if(this.dir != Direction.STOP) {
+			System.out.println("11111111111");
+			this.ptDir = this.dir;
+			}
 		locateDirection();
 	}
 
