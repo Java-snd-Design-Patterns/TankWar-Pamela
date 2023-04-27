@@ -23,9 +23,7 @@ public class TankClient extends Frame {
 		g.drawString("missiles count: " + missiles.size(), 10, 50);
 		g.drawString("explodes count: " + explodes.size(), 10, 70);
 		g.drawString("tanks count: " + tanks.size(), 10, 90);
-		for (int i = 0; i < 10; i++) {
-			tanks.add(new Tank(50 + 40 * (i + 1), 50, false, this));
-		}
+
 		for (int i = 0; i < missiles.size(); i++) {
 			Missile m = missiles.get(i);
 			m.hitTank(tanks);
@@ -42,8 +40,8 @@ public class TankClient extends Frame {
 		}
 
 		myTank.draw(g);
-		if (enemyTank.isLive()) {
-			enemyTank.draw(g);
+		for(int i = 0;i<tanks.size();i++) {
+			tanks.get(i).draw(g);
 		}
 //		if(m != null) 
 //			m.draw(g); 
@@ -84,6 +82,9 @@ public class TankClient extends Frame {
 		this.addKeyListener(new KeyMonitor());
 		setVisible(true);
 
+		for (int i = 0; i < 10; i++) {
+			tanks.add(new Tank(50 + 40 * (i + 1), 50, false, this));
+		}
 		new Thread(new PaintThread()).start();
 
 	}
