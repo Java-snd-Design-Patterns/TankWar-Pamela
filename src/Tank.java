@@ -11,6 +11,15 @@ public class Tank {
 	TankClient tc = null;
 	int x, y;
 	boolean good = true;
+	boolean live = true;
+
+	public boolean isLive() {
+		return live;
+	}
+
+	public void setLive(boolean live) {
+		this.live = live;
+	}
 
 	public boolean isGood() {
 		return good;
@@ -202,6 +211,7 @@ public class Tank {
 		return m;
 	}
 
+	public Rectangle getRect() {
+		return new Rectangle(x, y, WIDTH, HEIGHT);
+	}
 }
-
-
