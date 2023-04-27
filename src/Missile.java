@@ -9,6 +9,9 @@ public class Missile {
 
 	private int x, y;
 	Tank.Direction dir;
+	TankClient tc;
+	boolean good;
+	private boolean live = true;
 
 	public static int getXspeed() {
 		return XSPEED;
@@ -42,8 +45,6 @@ public class Missile {
 		return tc;
 	}
 
-	TankClient tc;
-
 	public boolean isLive() {
 		return live;
 	}
@@ -51,8 +52,6 @@ public class Missile {
 	public void setLive(boolean live) {
 		this.live = live;
 	}
-
-	private boolean live = true;
 
 	public Missile(int x, int y, Tank.Direction dir) {
 		this.x = x;
@@ -65,6 +64,14 @@ public class Missile {
 		this.y = y;
 		this.dir = dir;
 		this.tc = tc;
+	}
+
+	public Missile(int x, int y, Tank.Direction dir, TankClient tc, boolean good) {
+		this.x = x;
+		this.y = y;
+		this.dir = dir;
+		this.tc = tc;
+		this.good = good;
 	}
 
 	public void draw(Graphics g) {
@@ -125,7 +132,7 @@ public class Missile {
 	}
 
 	public boolean hitTank(Tank t) {
-		if (this.getRect().intersects(t.getRect()) && t.isLive()) {
+		if (this.live && this.getRect().intersects(t.getRect()) && t.isLive() && this.good != t.isGood()) {
 			t.setLive(false);
 			this.live = false;
 

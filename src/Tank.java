@@ -155,6 +155,11 @@ public class Tank {
 		if (this.dir != Direction.STOP) {
 
 			this.ptDir = this.dir;
+			
+			if (x < 0) x = 0;
+            if (y < 25) y = 25;
+            if (x + Tank.WIDTH > TankClient.GAME_WIDTH) x = TankClient.GAME_WIDTH - Tank.WIDTH;
+            if (y + Tank.HEIGHT > TankClient.GAME_HEIGHT) y = TankClient.GAME_HEIGHT - Tank.HEIGHT;
 		}
 		if (!good) {
 			// Direction. values () converts this enumeration type to an array Direction []
@@ -241,7 +246,7 @@ public class Tank {
 
 		int x = this.x + Tank.WIDTH / 2 - Missile.WIDTH / 2;
 		int y = this.y + Tank.HEIGHT / 2 - Missile.WIDTH / 2;
-		Missile m = new Missile(x, y, ptDir, tc);
+		Missile m = new Missile(x, y, ptDir, tc,this.good);
 		System.out.println(ptDir);
 		tc.missiles.add(m);
 		return m;

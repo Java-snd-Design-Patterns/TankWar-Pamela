@@ -35,13 +35,20 @@ public class TankClient extends Frame {
 		}
 
 		for (int i = 0; i < explodes.size(); i++) {
+			//System.out.println(explodes.size());
 			Explode e = explodes.get(i);
 			e.draw(g);
+			//explodes.remove(e);
 		}
 
 		myTank.draw(g);
 		for(int i = 0;i<tanks.size();i++) {
-			tanks.get(i).draw(g);
+			Tank tk = tanks.get(i);
+			if(tanks.get(i).isLive()) {
+				tanks.get(i).draw(g);	
+			}else {
+				tanks.remove(tk);
+			}
 		}
 //		if(m != null) 
 //			m.draw(g); 
