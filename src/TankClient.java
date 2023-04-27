@@ -3,7 +3,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
+import java.util.*;
 
 public class TankClient extends Frame {
 
@@ -16,15 +16,19 @@ public class TankClient extends Frame {
 	// Missile m ;
 	ArrayList<Missile> missiles = new ArrayList<Missile>();
 	ArrayList<Explode> explodes = new ArrayList<Explode>();
+	ArrayList<Tank> tanks = new ArrayList<Tank>();
 
 	public void paint(Graphics g) {
 
 		g.drawString("missiles count: " + missiles.size(), 10, 50);
 		g.drawString("explodes count: " + explodes.size(), 10, 70);
-
+		g.drawString("tanks count: " + tanks.size(), 10, 90);
+		for (int i = 0; i < 10; i++) {
+			tanks.add(new Tank(50 + 40 * (i + 1), 50, false, this));
+		}
 		for (int i = 0; i < missiles.size(); i++) {
 			Missile m = missiles.get(i);
-			m.hitTank(enemyTank);
+			m.hitTank(tanks);
 			if (!m.isLive()) {
 				missiles.remove(m);
 			} else {

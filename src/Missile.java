@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Missile {
 	public static final int XSPEED = 10;
@@ -141,6 +142,17 @@ public class Missile {
 
 	public void setY(int y) {
 		this.y = y;
+	}
+
+	public boolean hitTank(ArrayList<Tank> tanks) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < tanks.size(); i++) {
+			if (hitTank(tanks.get(i))) {
+				return true;
+			}
+		}
+		return false;
+
 	}
 
 }
