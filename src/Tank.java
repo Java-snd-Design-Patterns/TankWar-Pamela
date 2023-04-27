@@ -5,13 +5,12 @@ public class Tank {
 
 	public static final int XSPEED = 5;
 	public static final int YSPEED = 5;
-
 	public static final int WIDTH = 30;
 	public static final int HEIGHT = 30;
 
 	TankClient tc = null;
+	int x, y;
 
-	private int x, y;
 	private boolean bL = false, bU = false, bR = false, bD = false;
 
 	enum Direction {
@@ -52,6 +51,7 @@ public class Tank {
 			g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + Tank.WIDTH, y);
 			break;
 		case R:
+
 			g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + Tank.WIDTH, y + Tank.HEIGHT / 2);
 			break;
 		case RD:
@@ -62,7 +62,6 @@ public class Tank {
 			break;
 		case LD:
 			g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x, y + Tank.HEIGHT);
-
 			break;
 		case STOP:
 			break;
@@ -104,54 +103,56 @@ public class Tank {
 		case STOP:
 			break;
 		}
-
 		if (this.dir != Direction.STOP) {
 
 			this.ptDir = this.dir;
 		}
+
 	}
 
 	public void KeyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		switch (key) {
-		case KeyEvent.VK_LEFT:
+		case KeyEvent.VK_A:
 			bL = true;
 			break;
-		case KeyEvent.VK_UP:
+		case KeyEvent.VK_W:
 			bU = true;
 			break;
-		case KeyEvent.VK_RIGHT:
+		case KeyEvent.VK_D:
 			bR = true;
 			break;
-		case KeyEvent.VK_DOWN:
+		case KeyEvent.VK_S:
 			bD = true;
 			break;
+		case KeyEvent.VK_J:
+			fire();
+			break;
+
 		}
 		locateDirection();
+
 	}
 
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		switch (key) {
-		case KeyEvent.VK_CONTROL:
-			fire();
-			break;
-		case KeyEvent.VK_LEFT:
+		case KeyEvent.VK_A:
 			bL = false;
 			break;
-		case KeyEvent.VK_UP:
+		case KeyEvent.VK_W:
 			bU = false;
 			break;
-		case KeyEvent.VK_RIGHT:
+		case KeyEvent.VK_D:
 			bR = false;
 			break;
-		case KeyEvent.VK_DOWN:
+		case KeyEvent.VK_S:
 			bD = false;
 			break;
-
 		}
 		locateDirection();
 	}
+
 	void locateDirection() {
 		if (bL && !bU && !bR && !bD)
 			dir = Direction.L;
@@ -171,12 +172,16 @@ public class Tank {
 			dir = Direction.LD;
 		else if (!bL && !bU && !bR && !bD)
 			dir = Direction.STOP;
+
 	}
 
 	public Missile fire() {
+
 		int x = this.x + Tank.WIDTH / 2 - Missile.WIDTH / 2;
 		int y = this.y + Tank.HEIGHT / 2 - Missile.WIDTH / 2;
-		Missile m = new Missile(x, y, ptDir);
+		Missile m = new Missile(x, y, ptDir,tc);
+		System.out.println(ptDir);
+		tc.missiles.add(m);
 		return m;
 	}
 
