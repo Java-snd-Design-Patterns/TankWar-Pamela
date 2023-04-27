@@ -1,30 +1,39 @@
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class TankClient extends Frame {
 	public static final int GAME_WIDTH = 800;
 	public static final int GAME_HEIGHT = 600;
 
-	Tank myTank = new Tank(50, 50);
-	Missile m = new Missile(50, 50, Tank.Direction.R);
+	Tank myTank = new Tank(50, 50, this);
+	// Missile m ;
+	ArrayList<Missile> missiles = new ArrayList<Missile>();
 	Image offScreenImage = null;
 
 	public void paint(Graphics g) {
+		g.drawString("missiles count: " + missiles.size(), 10, 50);
 		myTank.draw(g);
-		m.draw(g);
+		// if (m != null)
+		// m.draw(g);
+		for (int i = 0; i < missiles.size(); i++) {
+			Missile m = missiles.get(i);
+			m.draw(g);
+		}
 	}
-
 	public void update(Graphics g) {
 		if (offScreenImage == null) {
 			offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
 		}
-
 		Graphics gOffScreen = offScreenImage.getGraphics();
-
 		Color c = gOffScreen.getColor();
 		gOffScreen.setColor(Color.GREEN);
 		gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		gOffScreen.setColor(c);
+
 		print(gOffScreen);
 		g.drawImage(offScreenImage, 0, 0, null);
 	}
@@ -40,7 +49,6 @@ public class TankClient extends Frame {
 		});
 		this.setResizable(false);
 		this.setBackground(Color.GREEN);
-
 		this.addKeyListener(new KeyMonitor());
 		setVisible(true);
 		new Thread(new PaintThread()).start();
@@ -60,15 +68,21 @@ public class TankClient extends Frame {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
-
 				}
 			}
 		}
+
 	}
 
 	private class KeyMonitor extends KeyAdapter {
+		public void keyReleased(KeyEvent e) {
+			myTank.keyReleased(e);
+		}
+
 		public void keyPressed(KeyEvent e) {
 			myTank.KeyPressed(e);
 		}
+
 	}
+
 }

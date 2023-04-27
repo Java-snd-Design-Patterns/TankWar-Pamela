@@ -12,7 +12,6 @@ public class Tank {
 	TankClient tc = null;
 
 	private int x, y;
-
 	private boolean bL = false, bU = false, bR = false, bD = false;
 
 	enum Direction {
@@ -20,6 +19,7 @@ public class Tank {
 	};
 
 	private Direction dir = Direction.STOP;
+
 	private Direction ptDir = Direction.D;
 
 	public Tank(int x, int y) {
@@ -52,7 +52,6 @@ public class Tank {
 			g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + Tank.WIDTH, y);
 			break;
 		case R:
-
 			g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + Tank.WIDTH, y + Tank.HEIGHT / 2);
 			break;
 		case RD:
@@ -63,6 +62,7 @@ public class Tank {
 			break;
 		case LD:
 			g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x, y + Tank.HEIGHT);
+
 			break;
 		case STOP:
 			break;
@@ -85,7 +85,6 @@ public class Tank {
 			break;
 		case RU:
 			x += XSPEED;
-
 			y -= YSPEED;
 			break;
 		case R:
@@ -105,14 +104,16 @@ public class Tank {
 		case STOP:
 			break;
 		}
+
+		if (this.dir != Direction.STOP) {
+
+			this.ptDir = this.dir;
+		}
 	}
 
 	public void KeyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		switch (key) {
-		case KeyEvent.VK_CONTROL:
-			tc.m = fire();
-			break;
 		case KeyEvent.VK_LEFT:
 			bL = true;
 			break;
@@ -129,10 +130,12 @@ public class Tank {
 		locateDirection();
 	}
 
-	
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		switch (key) {
+		case KeyEvent.VK_CONTROL:
+			fire();
+			break;
 		case KeyEvent.VK_LEFT:
 			bL = false;
 			break;
@@ -145,14 +148,10 @@ public class Tank {
 		case KeyEvent.VK_DOWN:
 			bD = false;
 			break;
+
 		}
-		if(this.dir != Direction.STOP) {
-			System.out.println("11111111111");
-			this.ptDir = this.dir;
-			}
 		locateDirection();
 	}
-
 	void locateDirection() {
 		if (bL && !bU && !bR && !bD)
 			dir = Direction.L;
@@ -180,4 +179,5 @@ public class Tank {
 		Missile m = new Missile(x, y, ptDir);
 		return m;
 	}
+
 }
