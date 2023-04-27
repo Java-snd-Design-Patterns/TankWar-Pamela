@@ -11,7 +11,7 @@ public class TankClient extends Frame {
 	public static final int GAME_HEIGHT = 600;
 	int x = 50, y = 50;
 	Image offScreenImage = null;
-	Tank myTank = new Tank(50, 50, this);
+	Tank myTank = new Tank(50, 50, true, this);
 	Tank enemyTank = new Tank(100, 100, false, this);
 	// Missile m ;
 	ArrayList<Missile> missiles = new ArrayList<Missile>();
@@ -106,3 +106,4 @@ public class TankClient extends Frame {
 	}
 
 }
+

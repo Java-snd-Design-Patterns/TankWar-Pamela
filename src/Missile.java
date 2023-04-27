@@ -9,6 +9,38 @@ public class Missile {
 
 	private int x, y;
 	Tank.Direction dir;
+	public static int getXspeed() {
+		return XSPEED;
+	}
+
+	public static int getYspeed() {
+		return YSPEED;
+	}
+
+	public static int getWidth() {
+		return WIDTH;
+	}
+
+	public static int getHeight() {
+		return HEIGHT;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public Tank.Direction getDir() {
+		return dir;
+	}
+
+	public TankClient getTc() {
+		return tc;
+	}
+
 	TankClient tc;
 	public boolean isLive() {
 		return live;
