@@ -127,9 +127,20 @@ public class Missile {
 		if (this.getRect().intersects(t.getRect()) && t.isLive()) {
 			t.setLive(false);
 			this.live = false;
+
+			Explode e = new Explode(t.getX(), t.getY(), tc);
+			tc.explodes.add(e);
 			return true;
 		}
 		return false;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
 	}
 
 }
