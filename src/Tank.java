@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 
 public class Tank {
 
@@ -9,7 +10,12 @@ public class Tank {
 	public static final int HEIGHT = 30;
 
 	TankClient tc = null;
+	int step = 0;
 	int x, y;
+
+	private static Random r = new Random();
+	Direction[] dirs = Direction.values();
+	int rn = r.nextInt(dirs.length);
 
 	public int getX() {
 		return x;
@@ -149,6 +155,19 @@ public class Tank {
 		if (this.dir != Direction.STOP) {
 
 			this.ptDir = this.dir;
+		}
+		if (!good) {
+			// Direction. values () converts this enumeration type to an array Direction []
+			// dirs=Direction. values ();
+			if (step == 0) {
+				step = r.nextInt(12) + 3;
+				int rn = r.nextInt(dirs.length);
+				dir = dirs[rn];
+			}
+			step--;
+
+			if (r.nextInt(40) > 38)
+				this.fire();
 		}
 
 	}
