@@ -10,6 +10,11 @@ public class Tank {
 
 	TankClient tc = null;
 	int x, y;
+	boolean good = true;
+
+	public boolean isGood() {
+		return good;
+	}
 
 	private boolean bL = false, bU = false, bR = false, bD = false;
 
@@ -31,9 +36,21 @@ public class Tank {
 		this.tc = tc;
 	}
 
+	public Tank(int x, int y, boolean good, TankClient tc) {
+		this(x, y);
+		this.good = good;
+		this.tc = tc;
+	}
+
 	public void draw(Graphics g) {
 		Color c = g.getColor();
-		g.setColor(Color.RED);
+		if (good) {
+			g.setColor(Color.RED);
+		} else {
+			g.setColor(Color.BLUE);
+		}
+
+		// g.setColor(Color.RED);
 		g.fillOval(x, y, WIDTH, HEIGHT);
 		g.setColor(c);
 
@@ -179,7 +196,7 @@ public class Tank {
 
 		int x = this.x + Tank.WIDTH / 2 - Missile.WIDTH / 2;
 		int y = this.y + Tank.HEIGHT / 2 - Missile.WIDTH / 2;
-		Missile m = new Missile(x, y, ptDir,tc);
+		Missile m = new Missile(x, y, ptDir, tc);
 		System.out.println(ptDir);
 		tc.missiles.add(m);
 		return m;
