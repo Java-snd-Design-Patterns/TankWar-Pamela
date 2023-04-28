@@ -12,6 +12,7 @@ public class Tank {
 	TankClient tc = null;
 	int step = 0;
 	int x, y;
+	int oldX, oldY;
 
 	private static Random r = new Random();
 	Direction[] dirs = Direction.values();
@@ -120,6 +121,8 @@ public class Tank {
 	}
 
 	void move() {
+		oldX = x;
+		oldY = y;
 		switch (dir) {
 		case L:
 			x -= XSPEED;
@@ -155,11 +158,15 @@ public class Tank {
 		if (this.dir != Direction.STOP) {
 
 			this.ptDir = this.dir;
-			
-			if (x < 0) x = 0;
-            if (y < 25) y = 25;
-            if (x + Tank.WIDTH > TankClient.GAME_WIDTH) x = TankClient.GAME_WIDTH - Tank.WIDTH;
-            if (y + Tank.HEIGHT > TankClient.GAME_HEIGHT) y = TankClient.GAME_HEIGHT - Tank.HEIGHT;
+
+			if (x < 0)
+				x = 0;
+			if (y < 25)
+				y = 25;
+			if (x + Tank.WIDTH > TankClient.GAME_WIDTH)
+				x = TankClient.GAME_WIDTH - Tank.WIDTH;
+			if (y + Tank.HEIGHT > TankClient.GAME_HEIGHT)
+				y = TankClient.GAME_HEIGHT - Tank.HEIGHT;
 		}
 		if (!good) {
 			// Direction. values () converts this enumeration type to an array Direction []
@@ -246,7 +253,7 @@ public class Tank {
 
 		int x = this.x + Tank.WIDTH / 2 - Missile.WIDTH / 2;
 		int y = this.y + Tank.HEIGHT / 2 - Missile.WIDTH / 2;
-		Missile m = new Missile(x, y, ptDir, tc,this.good);
+		Missile m = new Missile(x, y, ptDir, tc, this.good);
 		System.out.println(ptDir);
 		tc.missiles.add(m);
 		return m;
@@ -255,4 +262,18 @@ public class Tank {
 	public Rectangle getRect() {
 		return new Rectangle(x, y, WIDTH, HEIGHT);
 	}
+
+	public boolean collidesWithWall(Wall w) {
+		if (this.getRect().intersects(w.getRect()) && this.live) {
+			this.stay();
+			return true;
+		}
+		return false;
+	}
+
+	private void stay() {
+		x = oldX;
+		y = oldY;
+	}
+
 }

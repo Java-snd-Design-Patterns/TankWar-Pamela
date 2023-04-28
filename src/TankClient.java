@@ -17,6 +17,7 @@ public class TankClient extends Frame {
 	ArrayList<Missile> missiles = new ArrayList<Missile>();
 	ArrayList<Explode> explodes = new ArrayList<Explode>();
 	ArrayList<Tank> tanks = new ArrayList<Tank>();
+	Wall w = new Wall(200, 400, 200, 10, this);
 
 	public void paint(Graphics g) {
 
@@ -24,9 +25,11 @@ public class TankClient extends Frame {
 		g.drawString("explodes count: " + explodes.size(), 10, 70);
 		g.drawString("tanks count: " + tanks.size(), 10, 90);
 
+		w.draw(g);
 		for (int i = 0; i < missiles.size(); i++) {
 			Missile m = missiles.get(i);
 			m.hitTank(tanks);
+			m.hitWall (w);
 			if (!m.isLive()) {
 				missiles.remove(m);
 			} else {
@@ -42,9 +45,11 @@ public class TankClient extends Frame {
 		}
 
 		myTank.draw(g);
+		myTank.collidesWithWall(w);
 		for(int i = 0;i<tanks.size();i++) {
 			Tank tk = tanks.get(i);
 			if(tanks.get(i).isLive()) {
+				tk. collidesWithWall (w);
 				tanks.get(i).draw(g);	
 			}else {
 				tanks.remove(tk);
