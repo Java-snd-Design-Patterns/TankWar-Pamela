@@ -10,6 +10,7 @@ public class TankClient extends Frame {
 	public static final int GAME_WIDTH = 800;
 	public static final int GAME_HEIGHT = 600;
 	int x = 50, y = 50;
+	Blood bl = new Blood();
 	Image offScreenImage = null;
 	Tank myTank = new Tank(50, 50, true, this);
 	Tank enemyTank = new Tank(100, 100, false, this);
@@ -26,6 +27,10 @@ public class TankClient extends Frame {
 		g.drawString("tanks count: " + tanks.size(), 10, 90);
 		g.drawString("tank life:" + myTank.getLife(), 10, 110);
 
+		if(bl.isLive()) {
+			myTank.eat(bl);
+			bl.draw(g);
+		}
 		w.draw(g);
 		myTank.collidesWithTanks(tanks);
 		for (int i = 0; i < missiles.size(); i++) {
