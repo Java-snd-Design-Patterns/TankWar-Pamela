@@ -17,6 +17,15 @@ public class Tank {
 	private static Random r = new Random();
 	Direction[] dirs = Direction.values();
 	int rn = r.nextInt(dirs.length);
+	int life = 100;
+	
+	public int getLife() {
+		return life;
+	}
+
+	public void setLife(int life) {
+		this.life = life;
+	}
 
 	public int getX() {
 		return x;
