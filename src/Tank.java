@@ -18,7 +18,8 @@ public class Tank {
 	Direction[] dirs = Direction.values();
 	int rn = r.nextInt(dirs.length);
 	int life = 100;
-	
+	BloodBar bb = new BloodBar();
+
 	public int getLife() {
 		return life;
 	}
@@ -88,6 +89,7 @@ public class Tank {
 		Color c = g.getColor();
 		if (good) {
 			g.setColor(Color.RED);
+			bb.draw(g);
 		} else {
 			g.setColor(Color.BLUE);
 		}
@@ -325,4 +327,14 @@ public class Tank {
 		return false;
 	}
 
+	private class BloodBar {
+		public void draw(Graphics g) {
+			Color c = g.getColor();
+			g.setColor(Color.RED);
+			g.drawRect(x, y - 10, WIDTH, 10);
+			int w = WIDTH * life / 100;
+			g.fillRect(x, y - 10, w, 10);
+			g.setColor(c);
+		}
+	}
 }
