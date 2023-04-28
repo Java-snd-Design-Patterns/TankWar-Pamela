@@ -24,8 +24,9 @@ public class TankClient extends Frame {
 		g.drawString("missiles count: " + missiles.size(), 10, 50);
 		g.drawString("explodes count: " + explodes.size(), 10, 70);
 		g.drawString("tanks count: " + tanks.size(), 10, 90);
-
+		
 		w.draw(g);
+		myTank.collidesWithTanks(tanks);
 		for (int i = 0; i < missiles.size(); i++) {
 			Missile m = missiles.get(i);
 			m.hitTank(tanks);
@@ -50,6 +51,7 @@ public class TankClient extends Frame {
 			Tank tk = tanks.get(i);
 			if(tanks.get(i).isLive()) {
 				tk. collidesWithWall (w);
+				tk. collidesWithTanks(tanks);
 				tanks.get(i).draw(g);	
 			}else {
 				tanks.remove(tk);
