@@ -3,26 +3,10 @@ import java.awt.*;
 public class Explode {
 	int x, y;
 
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
 	private boolean live = true;
-
 	private TankClient tc;
 	int[] diameter = { 4, 7, 12, 18, 26, 32, 49, 30, 14, 6 };
+//现在画到了第几步
 	int step = 0;
 
 	public Explode(int x, int y, TankClient tc) {
@@ -33,7 +17,7 @@ public class Explode {
 
 	public void draw(Graphics g) {
 		if (!live) {
-			tc.missiles.remove(this);
+			tc.explodes.remove(this);
 			return;
 		}
 
@@ -51,7 +35,3 @@ public class Explode {
 	}
 
 }
-
-
-
-

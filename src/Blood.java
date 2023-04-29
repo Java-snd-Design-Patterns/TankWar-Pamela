@@ -32,7 +32,6 @@ public class Blood {
 		g.setColor(Color.MAGENTA);
 		g.fillRect(x, y, w, h);
 		g.setColor(c);
-
 		move();
 
 	}
@@ -40,7 +39,6 @@ public class Blood {
 	private void move() {
 		step++;
 		if (step == pos.length) {
-
 			step = 0;
 		}
 		x = pos[step][0];
